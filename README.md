@@ -1,7 +1,7 @@
 ---
 title: SuperTerminal
 description: AI-powered CLI that converts natural language to shell commands
-author: SuperTerminal Contributors
+author: Brijraj Singh
 ms.date: 2026-01-21
 ms.topic: overview
 keywords:
@@ -15,6 +15,8 @@ estimated_reading_time: 5
 ---
 
 # SuperTerminal
+
+I am so lazy and forgetful at times that it's very hard for me to remember all commands upfront. Sometimes its shameful to accept in open coding session that I forgot the basic command. Hence, I decided to make my own SuperTerminal.
 
 SuperTerminal is an AI-powered command-line interface that translates natural language descriptions into executable shell commands. Simply describe what you want to do in plain English, and SuperTerminal will generate the appropriate shell command for you to review and use.
 
