@@ -14,6 +14,10 @@ use error::{Result, SuperTerminalError};
 
 #[tokio::main]
 async fn main() {
+    // Load .env file if it exists (for development)
+    // This will fail silently if .env doesn't exist, which is fine for production
+    let _ = dotenvy::dotenv();
+
     if let Err(e) = run().await {
         eprintln!("{} {}", "Error:".red().bold(), e);
         std::process::exit(1);

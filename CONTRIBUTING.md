@@ -46,7 +46,12 @@ git remote add upstream https://github.com/original-owner/superterminal.git
 4. Set up your OpenAI API key:
 
 ```bash
+# Option 1: Environment variable
 export OPENAI_API_KEY='your-test-api-key'
+
+# Option 2: Create a .env file (recommended for development)
+cp .env.example .env
+# Then edit .env and add your API key
 ```
 
 5. Build the project:

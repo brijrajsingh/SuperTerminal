@@ -17,6 +17,8 @@
 # Configuration (may contain API keys)
 *.local
 .env
+.env.local
+.env.*.local
 
 # Test outputs
 *.profraw
@@ -30,3 +32,4 @@
 *.orig
 
 .env
+superterminal

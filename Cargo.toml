@@ -21,6 +21,7 @@ colored = "2.0"
 dialoguer = "0.11"
 dirs = "5.0"
 arboard = "3.6"
+dotenvy = "0.15"
 
 [dev-dependencies]
 tokio-test = "0.4"

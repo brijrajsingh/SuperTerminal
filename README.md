@@ -49,13 +49,30 @@ cargo install --path .
 
 ### Setting up your API Key
 
-SuperTerminal requires an OpenAI API key. Set it as an environment variable:
+SuperTerminal requires an OpenAI API key. You have two options:
+
+#### Option 1: Environment Variable (Recommended for Production)
+
+Set it as an environment variable:
 
 ```bash
 export OPENAI_API_KEY='your-api-key-here'
 ```
 
 For permanent configuration, add this line to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.).
+
+#### Option 2: .env File (Recommended for Development)
+
+Create a `.env` file in the project root:
+
+```bash
+echo "OPENAI_API_KEY=your-api-key-here" > .env
+```
+
+The `.env` file will be automatically loaded when you run SuperTerminal.
+
+> [!WARNING]
+> Never commit your `.env` file to version control. Add it to `.gitignore`.
 
 ### Customizing Settings
 

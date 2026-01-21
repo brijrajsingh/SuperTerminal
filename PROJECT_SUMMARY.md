@@ -16,6 +16,7 @@ This document provides a complete overview of the SuperTerminal project implemen
 
 ## Project Overview
 
+I am so lazy and forgetful at times that it's very hard for me to remember all commands upfront. Sometimes its shameful to accept in open coding session that I forgot the basic command. Hence, I decided to make my own SuperTerminal.
 **SuperTerminal** is an AI-powered command-line interface that translates natural language descriptions into executable shell commands. Built with Rust, it leverages OpenAI's GPT models to make the command line more accessible and intuitive.
 
 ## Architecture
@@ -105,19 +106,21 @@ Key dependencies and their purposes:
 | `dialoguer` | 0.11 | Interactive prompts |
 | `dirs` | 5.0 | Standard directory paths |
 | `arboard` | 3.6 | Cross-platform clipboard support |
+| `dotenvy` | 0.15 | .env file loading for development |
 
 ## Implementation Details
 
 ### Workflow
 
-1. **User Input**: User provides natural language query
-2. **Configuration Loading**: Load or create configuration with API key
-3. **AI Service Creation**: Initialize OpenAI client
-4. **Translation**: Send query to AI with system prompt
-5. **Response Processing**: Extract and clean command from AI response
-6. **User Confirmation**: Display command and ask for confirmation
-7. **Clipboard Copy**: Copy command to system clipboard
-8. **Output**: Display command ready to paste and execute
+1. **Environment Setup**: Load .env file if present (development mode)
+2. **User Input**: User provides natural language query
+3. **Configuration Loading**: Load or create configuration with API key
+4. **AI Service Creation**: Initialize OpenAI client
+5. **Translation**: Send query to AI with system prompt
+6. **Response Processing**: Extract and clean command from AI response
+7. **User Confirmation**: Display command and ask for confirmation
+8. **Clipboard Copy**: Copy command to system clipboard
+9. **Output**: Display command ready to paste and execute
 
 ### Safety Features
 

@@ -22,8 +22,11 @@ git clone https://github.com/yourusername/superterminal.git
 cd superterminal
 cargo install --path .
 
-# Set your API key
+# Option 1: Set your API key as environment variable
 export OPENAI_API_KEY='your-api-key-here'
+
+# Option 2: Or create a .env file for development
+echo "OPENAI_API_KEY=your-api-key-here" > .env
 ```
 
 ## First Command
