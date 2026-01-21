@@ -1,3 +1,4 @@
+![Logo](images/logo.png "SuperTerminal Logo")
 ---
 title: SuperTerminal
 description: AI-powered CLI that converts natural language to shell commands
