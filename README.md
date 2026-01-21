@@ -283,7 +283,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Roadmap
 
-* [ ] Shell integration for direct command execution
+* [ ] Shell integration for direct command execution with different shell variants - bash, zsh, powershell
 * [ ] Command history and favorites
 * [ ] Support for multiple AI providers
 * [ ] Support for desktop LLM model
