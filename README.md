@@ -285,6 +285,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 * [ ] Shell integration for direct command execution
 * [ ] Command history and favorites
 * [ ] Support for multiple AI providers
+* [ ] Support for desktop LLM model
 * [ ] Interactive command builder
 * [ ] Syntax highlighting for generated commands
 * [ ] Command explanation mode
