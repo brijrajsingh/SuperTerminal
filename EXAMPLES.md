@@ -14,6 +14,50 @@ estimated_reading_time: 10
 
 This document provides practical examples of using SuperTerminal for common command-line tasks.
 
+## Quick Start
+
+### Basic Workflow
+
+When you run SuperTerminal, the generated command is automatically copied to your clipboard:
+
+```bash
+$ superterminal "list all Python files"
+
+Translating to shell command...
+
+Generated Command:
+  find . -name "*.py"
+
+Copy this command to clipboard? [Y/n]: y
+
+✓ Command copied to clipboard!
+find . -name "*.py"
+Paste it anywhere with Ctrl+V (or Cmd+V on Mac)
+
+# Now just press Ctrl+V in your terminal to paste and execute
+$ find . -name "*.py"
+```
+
+### Skip Confirmation Mode
+
+Use `-y` flag to automatically copy without prompting:
+
+```bash
+$ superterminal -y "show disk usage"
+
+Translating to shell command...
+
+Generated Command:
+  df -h
+
+✓ Command copied to clipboard!
+df -h
+Paste it anywhere with Ctrl+V (or Cmd+V on Mac)
+
+# The command is ready in your clipboard - just paste and run
+$ df -h
+```
+
 ## File Operations
 
 ### Finding Files

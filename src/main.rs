@@ -4,6 +4,7 @@ mod config;
 mod error;
 
 use ai::AIService;
+use arboard::Clipboard;
 use clap::Parser;
 use cli::{Cli, Commands};
 use colored::Colorize;
@@ -132,13 +133,32 @@ async fn handle_query(query: &str, auto_yes: bool, verbose: bool) -> Result<()> 
     };
 
     if confirmed {
-        println!("\n{}", "Command ready to use:".green().bold());
-        println!("{}", command);
-        println!();
-        println!(
-            "{}",
-            "You can now copy and paste this command into your terminal.".bright_black()
-        );
+        // Copy to clipboard
+        match Clipboard::new() {
+            Ok(mut clipboard) => {
+                if let Err(e) = clipboard.set_text(&command) {
+                    eprintln!("{} {}", "Warning: Failed to copy to clipboard:".yellow(), e);
+                    println!("\n{}", "Command ready to use:".green().bold());
+                    println!("{}", command);
+                } else {
+                    println!("\n{}", "✓ Command copied to clipboard!".green().bold());
+                    println!("{}", command);
+                    println!(
+                        "{}",
+                        "Paste it anywhere with Ctrl+V (or Cmd+V on Mac)".bright_black()
+                    );
+                }
+            }
+            Err(e) => {
+                eprintln!("{} {}", "Warning: Could not access clipboard:".yellow(), e);
+                println!("\n{}", "Command ready to use:".green().bold());
+                println!("{}", command);
+                println!(
+                    "{}",
+                    "You can now copy and paste this command into your terminal.".bright_black()
+                );
+            }
+        }
     } else {
         println!("{}", "Command not copied.".yellow());
     }

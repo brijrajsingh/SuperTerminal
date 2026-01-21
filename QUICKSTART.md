@@ -38,7 +38,8 @@ You'll see:
 
 1. The AI translating your request
 2. The generated command displayed
-3. A prompt asking if you want to use it
+3. A prompt asking if you want to copy it to clipboard
+4. The command automatically copied (ready to paste with Ctrl+V or Cmd+V)
 
 ## Common Examples
 
@@ -75,6 +76,7 @@ superterminal config --temperature 0.5
 
 * **Be specific**: "find large files" → "find files larger than 100MB"
 * **Use `-y` flag**: Skip confirmation for known-safe commands
+* **Clipboard ready**: Commands are automatically copied - just paste with Ctrl+V (Cmd+V on Mac)
 * **Review commands**: Always verify before executing destructive operations
 
 ## Next Steps

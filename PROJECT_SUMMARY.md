@@ -104,6 +104,7 @@ Key dependencies and their purposes:
 | `colored` | 2.0 | Terminal color output |
 | `dialoguer` | 0.11 | Interactive prompts |
 | `dirs` | 5.0 | Standard directory paths |
+| `arboard` | 3.6 | Cross-platform clipboard support |
 
 ## Implementation Details
 
@@ -115,12 +116,14 @@ Key dependencies and their purposes:
 4. **Translation**: Send query to AI with system prompt
 5. **Response Processing**: Extract and clean command from AI response
 6. **User Confirmation**: Display command and ask for confirmation
-7. **Output**: Display command for user to copy and execute
+7. **Clipboard Copy**: Copy command to system clipboard
+8. **Output**: Display command ready to paste and execute
 
 ### Safety Features
 
 * **No Automatic Execution**: Commands are displayed, not executed
 * **User Confirmation**: Interactive confirmation before copying
+* **Clipboard Integration**: Commands automatically copied for easy pasting
 * **API Key Security**: Environment variable-based key management
 * **Error Handling**: Comprehensive error messages and recovery
 

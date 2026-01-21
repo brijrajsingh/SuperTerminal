@@ -21,6 +21,7 @@ SuperTerminal is an AI-powered command-line interface that translates natural la
 ## Features
 
 * **Natural Language to Shell Commands**: Describe what you want in plain English
+* **Automatic Clipboard Copy**: Generated commands are automatically copied to your clipboard
 * **Interactive Confirmation**: Review generated commands before using them
 * **Configurable AI Settings**: Customize model, temperature, and token limits
 * **Safe by Design**: Commands are displayed for review, not automatically executed
@@ -89,7 +90,8 @@ This will:
 1. Translate your request to a shell command
 2. Display the generated command
 3. Ask for your confirmation
-4. Show the command ready to use
+4. Copy the command to your clipboard automatically
+5. Show the command ready to paste and use
 
 ### Skip Confirmation
 
@@ -138,10 +140,11 @@ SuperTerminal uses OpenAI's GPT models to translate natural language into shell 
 1. **Input Processing**: Your natural language query is sent to the AI
 2. **Command Generation**: The AI generates an appropriate shell command
 3. **Safety Check**: The command is displayed for your review
-4. **User Control**: You decide whether to use the command
+4. **Clipboard Copy**: Upon confirmation, the command is copied to your clipboard
+5. **User Control**: You can paste and execute the command when ready
 
 > [!IMPORTANT]
-> SuperTerminal displays commands for you to copy and execute manually. It does not automatically execute commands on your system.
+> SuperTerminal copies commands to your clipboard for easy pasting. It does not automatically execute commands on your system, giving you full control over what runs.
 
 ## Architecture
 
