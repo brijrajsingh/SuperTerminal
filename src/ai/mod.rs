@@ -26,7 +26,7 @@ impl AIService {
     }
 
     /// Translates natural language input to a shell command
-    pub async fn translate_to_command(&self, natural_language: &str) -> Result<String> {
+    pub async fn translate_to_command(&self, natural_language: &str, shell: &str) -> Result<String> {
         if natural_language.trim().is_empty() {
             return Err(SuperTerminalError::InvalidInput(
                 "Input cannot be empty".to_string(),
@@ -35,8 +35,10 @@ impl AIService {
 
         let system_message = self.build_system_prompt();
         let user_message = format!(
-            "Convert this natural language request to a shell command: {}",
-            natural_language
+            "You are a shell command translator. Convert natural language queries into shell commands for {}. \
+             Only respond with the command itself, no explanations or markdown formatting. \
+             Make sure the command is compatible with {} shell syntax.",
+            natural_language, shell
         );
 
         let request = CreateChatCompletionRequestArgs::default()

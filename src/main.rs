@@ -11,6 +11,7 @@ use colored::Colorize;
 use config::Config;
 use dialoguer::{theme::ColorfulTheme, Confirm};
 use error::{Result, SuperTerminalError};
+use std::env;
 
 #[tokio::main]
 async fn main() {
@@ -103,8 +104,45 @@ async fn handle_command(command: Commands) -> Result<()> {
     }
 }
 
+/// Detect the current shell type
+fn detect_shell() -> String {
+    // Try to get shell from SHELL environment variable (works on macOS and Linux)
+    if let Ok(shell_path) = env::var("SHELL") {
+        if let Some(shell_name) = shell_path.split('/').last() {
+            let shell = shell_name.to_string();
+            // Return the detected shell
+            return shell;
+        }
+    }
+
+    // Fallback: Try to detect from parent process on Unix-like systems
+    #[cfg(unix)]
+    {
+        // On macOS, default to zsh (macOS 10.15+)
+        #[cfg(target_os = "macos")]
+        return "zsh".to_string();
+        
+        // On other Unix systems, default to bash
+        #[cfg(not(target_os = "macos"))]
+        return "bash".to_string();
+    }
+
+    // On Windows, check for PowerShell or CMD
+    #[cfg(target_os = "windows")]
+    {
+        if env::var("PSModulePath").is_ok() {
+            return "powershell".to_string();
+        }
+        return "cmd".to_string();
+    }
+}
+
 async fn handle_query(query: &str, auto_yes: bool, verbose: bool) -> Result<()> {
+    // Detect current shell
+    let shell = detect_shell();
+    
     if verbose {
+        println!("{} {}", "Detected shell:".cyan(), shell.bright_cyan());
         println!("{} {}", "Processing query:".cyan(), query);
     }
 
@@ -117,8 +155,8 @@ async fn handle_query(query: &str, auto_yes: bool, verbose: bool) -> Result<()> 
     // Show loading indicator
     println!("{}", "Translating to shell command...".yellow());
 
-    // Translate to command
-    let command = ai_service.translate_to_command(query).await?;
+    // Translate to command with shell context
+    let command = ai_service.translate_to_command(query, &shell).await?;
 
     // Display the generated command
     println!("\n{}", "Generated Command:".green().bold());
