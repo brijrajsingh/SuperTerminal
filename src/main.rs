@@ -108,7 +108,7 @@ async fn handle_command(command: Commands) -> Result<()> {
 fn detect_shell() -> String {
     // Try to get shell from SHELL environment variable (works on macOS and Linux)
     if let Ok(shell_path) = env::var("SHELL") {
-        if let Some(shell_name) = shell_path.split('/').last() {
+        if let Some(shell_name) = shell_path.split('/').next_back() {
             let shell = shell_name.to_string();
             // Return the detected shell
             return shell;
@@ -138,6 +138,9 @@ fn detect_shell() -> String {
 }
 
 async fn handle_query(query: &str, auto_yes: bool, verbose: bool) -> Result<()> {
+    // Validate input before processing (prompt injection & length checks)
+    AIService::validate_input(query)?;
+
     // Detect current shell
     let shell = detect_shell();
     
@@ -156,6 +159,7 @@ async fn handle_query(query: &str, auto_yes: bool, verbose: bool) -> Result<()> 
     println!("{}", "Translating to shell command...".yellow());
 
     // Translate to command with shell context
+    // (also validates the AI response against the dangerous command blocklist)
     let command = ai_service.translate_to_command(query, &shell).await?;
 
     // Display the generated command

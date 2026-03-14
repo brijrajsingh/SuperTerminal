@@ -48,6 +48,85 @@ cd superterminal
 cargo install --path .
 ```
 
+### Adding to PATH
+
+`cargo install` places the binary in `~/.cargo/bin/`. Ensure this directory is in your PATH:
+
+```bash
+# For zsh (default on macOS)
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# For bash
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+If you built with `cargo build --release` instead, copy the binary to a directory in your PATH:
+
+```bash
+cp target/release/superterminal /usr/local/bin/
+```
+
+Verify the installation:
+
+```bash
+which superterminal
+```
+
+### Creating a Short Alias
+
+Use `st` as a shorthand for `superterminal`:
+
+#### macOS / Linux (bash or zsh)
+
+Create a symlink:
+
+```bash
+ln -s $(which superterminal) /usr/local/bin/st
+```
+
+Or add a shell alias to your profile (`~/.zshrc` or `~/.bashrc`):
+
+```bash
+echo 'alias st="superterminal"' >> ~/.zshrc   # for zsh
+source ~/.zshrc
+
+echo 'alias st="superterminal"' >> ~/.bashrc  # for bash
+source ~/.bashrc
+```
+
+#### Windows (Command Prompt)
+
+Create a doskey alias for the current session:
+
+```cmd
+doskey st=superterminal $*
+```
+
+To make it permanent, add a batch file to a directory in your PATH:
+
+```cmd
+echo @superterminal %* > %USERPROFILE%\st.cmd
+```
+
+#### Windows (PowerShell)
+
+Add an alias to your PowerShell profile:
+
+```powershell
+Add-Content $PROFILE 'function st { superterminal @args }'
+. $PROFILE
+```
+
+#### Verify
+
+Now you can simply type:
+
+```bash
+st "list all files modified today"
+```
+
 ## Configuration
 
 ### Setting up your API Key

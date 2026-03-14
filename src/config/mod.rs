@@ -52,7 +52,7 @@ impl Config {
         Ok(config)
     }
 
-    /// Saves configuration to file
+    /// Saves configuration to file with restricted permissions
     pub fn save(&self) -> Result<()> {
         let config_path = Self::config_path()?;
 
@@ -63,7 +63,16 @@ impl Config {
 
         let content = serde_json::to_string_pretty(self)
             .map_err(|e| SuperTerminalError::ConfigError(e.to_string()))?;
-        fs::write(config_path, content)?;
+        fs::write(&config_path, &content)?;
+
+        // Restrict file permissions to owner-only on Unix (contains API key)
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let perms = fs::Permissions::from_mode(0o600);
+            fs::set_permissions(&config_path, perms)?;
+        }
+
         Ok(())
     }
 

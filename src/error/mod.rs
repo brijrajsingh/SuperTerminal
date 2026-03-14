@@ -21,6 +21,9 @@ pub enum SuperTerminalError {
 
     #[error("API key not found. Please set OPENAI_API_KEY environment variable")]
     MissingApiKey,
+
+    #[error("Dangerous command blocked: {0}")]
+    DangerousCommand(String),
 }
 
 /// Result type alias for SuperTerminal operations
